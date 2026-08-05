@@ -1,519 +1,64 @@
-# Prompt Aprimorado
+Solicitação para a Fase 1
 
-Quero que você atue como um **Arquiteto de Dados Sênior**, **Engenheiro de Dados Sênior** e **Tech Lead** responsável por planejar um projeto de nível profissional para portfólio.
+Com base na descrição da Fase 1, elabore um guia de desenvolvimento textual detalhado explicando passo a passo tudo o que deve ser feito para atingir o objetivo desta etapa.
 
-Meu objetivo é desenvolver um **pipeline ELT semi-real-time** completo utilizando tecnologias modernas **gratuitas e open source** do ecossistema de Data Engineering. O documento deverá servir como um guia completo de estudos e implementação, permitindo que eu execute o projeto do início ao fim sem depender de outro roteiro.
+Descrição da Fase
 
-O projeto deverá ser executado inteiramente em ambiente local utilizando **Docker Compose**, permitindo que qualquer pessoa consiga reproduzi-lo sem custos de infraestrutura em nuvem.
+Fase 1: Infraestrutura Base e Simulador IoT
 
----
+Objetivo: Estabelecer o alicerce do projeto (containers) e criar a fonte produtora de dados.
 
-# Projeto
+Entregáveis:
 
-## Objetivo
+Arquivo docker-compose.yml base.
+API FastAPI do gerador de telemetria em container separado.
+Rede virtual configurada.
 
-Construir um pipeline ELT semi-real-time capaz de ingerir dados provenientes de IoT, logs ou APIs, armazená-los em um Data Lake, transformá-los incrementalmente e disponibilizá-los em um Data Warehouse para consultas analíticas.
+Tecnologias:
 
----
+Docker
+Docker Compose
+Python
+FastAPI
+Faker
+Pydantic
 
-# Stack Tecnológica
+Pré-requisitos:
 
-## Fonte de Dados
+Docker instalado.
+Conhecimentos básicos sobre redes Docker.
 
-* Apache Kafka (preferencialmente)
-* API REST simulada utilizando FastAPI
-* Gerador de dados IoT/Logs em Python
-* Dados enviados para o Data Lake (Raw Zone)
+Conceitos envolvidos:
 
----
+Containerização
+APIs REST
+Geração de séries temporais
 
-## Processamento
+Tempo estimado: 1 a 2 dias.
 
-* Apache Spark Structured Streaming (preferencialmente)
-* Apache Flink (comparação conceitual)
+Dificuldade: Fácil.
 
----
+Resultado esperado: Um endpoint rodando localmente capaz de gerar continuamente dados JSON simulando telemetria de turbinas eólicas.
 
-## Orquestração
+Como quero a resposta
 
-* Apache Airflow (preferencialmente)
-* Dagster (comparação conceitual)
+Quero uma descrição textual extremamente detalhada de todas as atividades necessárias para concluir esta fase.
 
----
+Para cada passo, explique:
 
-## Data Lake
+Um passo a passo em alto nível de como deve ser feita essa solução da fase 1.
+O objetivo da atividade.
+Por que essa atividade deve ser realizada.
+Como ela se encaixa no fluxo geral do projeto.
+Quais erros são comuns nessa etapa e como evitá-los.
+Como verificar que a atividade foi concluída com sucesso, sem fornecer comandos ou código.
 
-* MinIO (substituindo Amazon S3)
-* Arquivos Parquet
-* Compressão Snappy
-* Particionamento por:
+Restrições
+Não escreva código.
+Não forneça comandos prontos para copiar e colar.
+Não implemente nenhuma solução.
+Não entregue arquivos prontos.
+Não escreva configurações completas.
+Não resolva a etapa por mim.
+Atue apenas como um mentor técnico, explicando o raciocínio, a sequência de desenvolvimento e os conhecimentos necessários para que eu implemente a solução por conta própria.
 
-  * Ano
-  * Mês
-  * Dia
-  * Hora
-
----
-
-## Catálogo de Dados
-
-* Hive Metastore
-* (Opcional) Project Nessie
-
----
-
-## Query Engine
-
-* Trino (preferencialmente)
-* DuckDB (comparação)
-* Spark SQL (comparação)
-
-Explique como essas ferramentas substituem o Redshift Spectrum permitindo consultas diretamente sobre arquivos Parquet armazenados no MinIO.
-
----
-
-## Data Warehouse
-
-* PostgreSQL (preferencialmente)
-* Supabase PostgreSQL (opcional)
-
-O projeto deverá utilizar:
-
-* Staging
-* Data Warehouse
-* Data Marts
-
-Explique por que PostgreSQL foi escolhido em vez de Redshift, BigQuery ou Snowflake.
-
----
-
-## Transformações
-
-* dbt Core
-* Models
-* Sources
-* Seeds
-* Snapshots
-* Incremental Models
-* Macros
-* Documentation
-* Exposures
-* Tests
-
----
-
-## Qualidade dos Dados
-
-* dbt Tests
-* Great Expectations
-* (Opcional) Pandera
-
----
-
-## Visualização
-
-Escolha uma das ferramentas abaixo:
-
-* Apache Superset
-* Metabase
-
-Explique a arquitetura e as vantagens da ferramenta escolhida.
-
----
-
-## Monitoramento
-
-* Prometheus
-* Grafana
-* Monitoramento do Airflow
-* Logs centralizados
-
----
-
-## Containers
-
-* Docker
-* Docker Compose
-
-Todos os serviços deverão executar localmente.
-
----
-
-## CI/CD
-
-* GitHub Actions
-
----
-
-## Infraestrutura como Código
-
-* Terraform (Docker Provider)
-
-ou
-
-* Docker Compose (infraestrutura local)
-
-Explique como o Terraform pode ser utilizado mesmo sem AWS para provisionar containers e infraestrutura local.
-
----
-
-# O documento deverá ser entregue em formato PDF e possuir uma estrutura semelhante à documentação de um projeto corporativo.
-
-## Estrutura esperada
-
-### 1. Introdução
-
-* Objetivos do projeto
-* Problema resolvido
-* Motivação
-* Cenário de negócio
-* Arquitetura geral
-
----
-
-### 2. Arquitetura
-
-Apresente:
-
-* Arquitetura completa
-* Fluxograma
-* Componentes
-* Comunicação entre serviços
-* Responsabilidade de cada tecnologia
-* Justificativa da escolha de cada ferramenta
-
-Explique detalhadamente por que cada tecnologia foi escolhida.
-
-Por exemplo:
-
-* Spark vs Flink
-* Airflow vs Dagster
-* PostgreSQL vs ClickHouse
-* MinIO vs Amazon S3
-* Trino vs Redshift Spectrum
-* Superset vs Metabase
-
----
-
-### 3. Roadmap de Desenvolvimento
-
-Divida o projeto em fases.
-
-Para cada fase apresente:
-
-* Objetivo
-* Entregáveis
-* Tecnologias utilizadas
-* Pré-requisitos
-* Conceitos necessários
-* Tempo estimado
-* Dificuldade
-* Resultado esperado
-
----
-
-### 4. Plano de Estudos
-
-Para cada tecnologia, explique em detalhes:
-
-## O que estudar antes de implementar
-
-Exemplo:
-
-### Apache Kafka
-
-* Conceitos fundamentais
-* Topics
-* Producers
-* Consumers
-* Consumer Groups
-* Partitions
-* Replication
-* Offset
-* Exactly Once
-* At Least Once
-* At Most Once
-* Schema Registry
-* Avro
-* Serialização
-
-Depois explique profundamente cada conceito.
-
-Faça isso para TODAS as tecnologias do projeto.
-
----
-
-### 5. Ordem Ideal dos Estudos
-
-Monte uma trilha completa.
-
-Exemplo:
-
-1. Linux
-2. Docker
-3. Docker Compose
-4. Git
-5. SQL Avançado
-6. PostgreSQL
-7. Python
-8. FastAPI
-9. Apache Kafka
-10. Spark Structured Streaming
-11. MinIO
-12. Trino
-13. dbt Core
-14. Airflow
-15. Terraform
-16. GitHub Actions
-17. Great Expectations
-18. Prometheus
-19. Grafana
-20. Apache Superset
-
-Explique por que essa ordem é recomendada.
-
----
-
-### 6. Fluxo de Desenvolvimento
-
-Para cada etapa, apresente:
-
-* Objetivo
-* O que será desenvolvido
-* Quais arquivos serão criados
-* Estrutura de diretórios
-* Comandos utilizados
-* Boas práticas
-* Possíveis erros
-* Como testar
-* Critérios para considerar a etapa concluída
-
----
-
-### 7. Desenvolvimento Passo a Passo
-
-Explique detalhadamente como desenvolver cada componente.
-
-Inclua:
-
-#### FastAPI
-
-* API REST
-* Simulador de IoT
-* Gerador de eventos
-
-#### Kafka
-
-* Producer
-* Consumer
-
-#### Spark Structured Streaming
-
-* Leitura do Kafka
-* Processamento
-* Escrita no MinIO
-
-#### MinIO
-
-* Buckets
-* Organização do Data Lake
-* Particionamento
-
-#### Trino
-
-* Configuração
-* Conectores
-* Consulta ao MinIO
-
-#### PostgreSQL
-
-* Schemas
-* Tabelas
-* Data Warehouse
-* Data Marts
-
-#### dbt Core
-
-* Sources
-* Models
-* Incremental Models
-* Snapshots
-* Tests
-* Documentation
-
-#### Airflow
-
-* DAGs
-* Operators
-* Scheduling
-* Monitoramento
-
-#### Terraform
-
-* Provisionamento dos containers
-* Organização dos módulos
-* Variáveis
-* State
-
-#### GitHub Actions
-
-* Build
-* Testes
-* Deploy
-
----
-
-### 8. Organização do Repositório
-
-Mostre uma estrutura profissional de diretórios explicando cada pasta e arquivo.
-
----
-
-### 9. Testes
-
-Explique como validar cada etapa.
-
-Inclua:
-
-* Testes unitários
-* Testes de integração
-* Testes do dbt
-* Testes de qualidade
-* Observabilidade
-* Monitoramento
-
----
-
-### 10. Monitoramento
-
-Explique como monitorar:
-
-* Kafka
-* Spark
-* Airflow
-* PostgreSQL
-* MinIO
-* Trino
-* Docker
-* Performance
-* Latência
-* Throughput
-* Qualidade dos dados
-
----
-
-### 11. Boas Práticas
-
-Inclua recomendações sobre:
-
-* Arquitetura
-* Versionamento
-* Organização do código
-* Segurança
-* Particionamento
-* Governança
-* Modelagem de Dados
-* Performance
-* Otimização de consultas
-* Organização do Data Lake
-* Convenções de nomenclatura
-
----
-
-### 12. Cronograma
-
-Monte um cronograma semanal completo.
-
-Cada semana deve conter:
-
-* Estudos
-* Implementação
-* Testes
-* Entregáveis
-
----
-
-### 13. Checklist Final
-
-Crie uma checklist para validar que o projeto está concluído.
-
----
-
-### 14. Evoluções Futuras
-
-Sugira melhorias para transformar o projeto em uma arquitetura Enterprise.
-
-Inclua:
-
-* Apache Iceberg
-* Delta Lake
-* Apache Hudi
-* Data Mesh
-* Lakehouse
-* CDC
-* Debezium
-* Kubernetes
-* Grafana
-* Prometheus
-* OpenMetadata
-* Apache Atlas
-* ClickHouse
-* Apache Pinot
-* Apache Druid
-* Apache Pulsar
-* Apache NiFi
-
-Explique quando e por que cada tecnologia seria incorporada.
-
----
-
-# Fluxo esperado
-
-FastAPI / Simulador IoT
-
-↓
-
-Apache Kafka
-
-↓
-
-Spark Structured Streaming
-
-↓
-
-MinIO (Raw Zone)
-
-↓
-
-dbt Core
-
-↓
-
-PostgreSQL (Staging)
-
-↓
-
-PostgreSQL (Data Warehouse)
-
-↓
-
-Data Marts
-
-↓
-
-Apache Superset ou Metabase
-
-↓
-
-Monitoramento (Prometheus + Grafana)
-
-↓
-
-Alertas
-
----
-
-O documento deve ser extremamente detalhado, com linguagem técnica, explicações didáticas, diagramas em ASCII quando necessário, tabelas comparativas, exemplos de código, decisões arquiteturais, boas práticas de mercado e justificativas para todas as escolhas. O resultado deve ter qualidade equivalente à documentação técnica utilizada por empresas de tecnologia para orientar engenheiros de dados na construção de pipelines modernos utilizando exclusivamente tecnologias gratuitas e open source.
-
-
-Se não conseguir gerar o pdf, salve a resposta em um arquivo chamado 'documento_projeto.md'
