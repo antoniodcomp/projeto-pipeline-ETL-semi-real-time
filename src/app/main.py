@@ -1,7 +1,7 @@
 import asyncio
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
-from app.replayer import Replayer
+from .replayer import Replayer
 
 app = FastAPI()
 
@@ -11,9 +11,9 @@ app.state.replayer_task = False
 
 ''' Verificar os async'''
 
-async def raplayer_worker(house_id: str, rate: float):
+async def replayer_worker(house_id: str, rate: float):
     
-    replayer = Replayer(file_path="data/household_power_consumption.txt", house_id=house_id, rate=rate)
+    replayer = Replayer(file_path="src/data/household_power_consumption.txt", house_id=house_id, rate=rate)
 
     try:
 
@@ -47,14 +47,14 @@ class StartConfig(BaseModel):
 
     
 @app.post("/start", tags=["Controle"])
-async def start_replayer(config: StarConfig):
+async def start_replayer(config: StartConfig):
 
     if app.state.is_running:
         raise HTTPException(status_code=400, detail="O Replayer já está em execução.")
 
     app.state.is_running = True
 
-    app.state.replayer_task = asyncio.creat_task(
+    app.state.replayer_task = asyncio.create_task(
         replayer_worker(house_id=config.house_id, rate=config.rate)
     )
 
