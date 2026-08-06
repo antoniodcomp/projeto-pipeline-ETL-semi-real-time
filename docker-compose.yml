@@ -1,0 +1,35 @@
+name: etl-pipeline-semi-real-time
+
+services:
+  replayer:
+    build:
+      context: "."
+      dockerfile: infra/docker/Dockerfile.replayer
+
+    container_name: replayer
+
+    networks:
+      - pipeline-network
+
+    ports:
+      - "8000:8000"
+    
+    volumes:
+      - ./src/data:/data
+
+    env_file:
+      - .env
+
+    restart: unless-stopped
+
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 5s
+
+networks:
+  pipeline-network:
+    driver: bridge
+    name: pipeline-network
