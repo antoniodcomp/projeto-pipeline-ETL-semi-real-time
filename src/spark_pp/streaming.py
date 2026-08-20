@@ -11,21 +11,29 @@ class Streaming:
         self.spark = spark
         self.kafka_serv = kafka_serv
         self.kafka_tp = kafka_tp
-        self.kafka_tp = kafka_tp
-        self.minio_path =  minio_path
-        self. minio_checkpoint =  minio_checkpoint
+        self.minio_path = minio_path
+        self.minio_checkpoint = minio_checkpoint
 
 
 
     def run(self):
 
-        df = self.spark.readStream.format("kafka").load()
+        df = self.spark.readStream \
+            .format("kafka") \
+            .option("kafka.bootstrap.servers", self.kafka_serv) \
+            .option("subscribe", self.kafka_tp) \
+            .load()
 
         schema = DataSchema.get_kafka_payload_schema()
         transformer = Transformations()
 
         df = transformer.transform(df, schema)
 
-        query = df.writeStream.format("parquet").start()
+        query = df.writeStream \
+            .format("parquet") \
+            .option("path", self.minio_path) \
+            .option("checkpointLocation", self.minio_checkpoint) \
+            .partitionBy("year", "month") \
+            .start()
 
-        query.awaitTarmination()
+        query.awaitTermination()

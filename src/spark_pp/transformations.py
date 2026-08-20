@@ -18,9 +18,11 @@ class Transformations:
 
     def transform(self, df_raw: DataFrame, schema: StructType) -> DataFrame:
 
-        df_new = df_raw.withColum("data_json_transfomed", from_json(col("value").cast("string"), schema))
+        df_new = df_raw.withColumn("data_json", from_json(col("value").cast("string"), schema))
 
         df_new = df_new.select("data_json.*")
 
         df_f = df_new.withColumn("year", year(to_timestamp("original_datetime")))\
                      .withColumn("month", month(to_timestamp("original_datetime")))
+        
+        return df_f

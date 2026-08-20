@@ -15,7 +15,7 @@ services:
       - "8000:8000"
     
     volumes:
-      - ./src/data:/data
+      - ./src:/app/src
 
     env_file:
       - .env
@@ -28,6 +28,39 @@ services:
       timeout: 5s
       retries: 3
       start_period: 5s
+  
+  # -------------------------------------
+
+  postgres_dw:
+    image: postgres_dw
+    container_name: postgres_dw
+
+    networks:
+      - pipeline-network
+    
+    ports:
+      - "5432:5432"
+    
+    environment:
+      POSTGRES_USER: ${bananaJacare:-admin}
+      POSTGRES_PASSWORD: ${12345:-admin123}
+      POSTGRES_DB: ${POSTGRES_DB:-data_warehouse}
+
+    volumes:
+      - posgres_data:/var/lib/posgresql/data
+
+    restart: unless-stopped
+
+
+
+
+  dataload:
+    build:
+      context: "."
+      dockerfile: infra/docker/Dockerfile.dataload
+
+      ports:
+        - 
 
 networks:
   pipeline-network:

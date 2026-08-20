@@ -9,7 +9,7 @@ from pyspark.sql.types import (
 class DataSchema:
 
     @staticmethod
-    def get_kafka_payload_schema(self) -> StructType:
+    def get_kafka_payload_schema() -> StructType:
 
         struct = StructType([
         StructField("house_id", StringType(), True),
