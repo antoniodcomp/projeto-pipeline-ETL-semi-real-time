@@ -1,14 +1,14 @@
 Solicitação para a Fase 1
 
-Com base na descrição da Fase 3, elabore um guia de desenvolvimento textual detalhado explicando passo a passo tudo o que deve ser feito para atingir o objetivo desta etapa.
+Com base na descrição do documento **@fase_4.md**, elabore um guia de desenvolvimento textual detalhado explicando passo a passo tudo o que deve ser feito para atingir o objetivo desta etapa.
 
-### Fase 4: Modelagem e Carga no Data Warehouse
-- **Objetivo:** Preparar a base de consumo analítico.
-- **Entregáveis:** PostgreSQL provisionado, scripts em Python ou ferramenta de orquestração (Airflow) para puxar os dados do MinIO e carregar em uma tabela de Staging no Postgres (extensão do ELT).
-- **Tecnologias:** PostgreSQL, Pandas/Psycopg2 (para scripts de carga) ou Airflow Operators.
-- **Pré-requisitos:** Conhecimentos de Modelagem Relacional e SQL.
-- **Conceitos:** Staging Tables, Copy commands, Idempotência.
-- **Tempo Estimado:** 3 dias.
+### Fase 5: Transformações com dbt (Data Build Tool)
+- **Objetivo:** Aplicar regras de negócio e criar Data Marts agregados dentro do PostgreSQL utilizando dbt.
+- **Entregáveis:** Projeto dbt inicializado, modelos staging (limpeza de tipos), modelos dimensionais (Dimensões de turbina) e modelos Fato (Fato_Geracao). Testes de schema configurados.
+- **Tecnologias:** dbt-core, dbt-postgres.
+- **Pré-requisitos:** PostgreSQL rodando com dados na staging.
+- **Conceitos:** Jinja Templating, DAGs, Materializações (Table, View, Incremental), Testes de Qualidade.
+- **Tempo Estimado:** 3 a 4 dias.
 - **Dificuldade:** Médio.
-- **Resultado Esperado:** Dados fluindo do MinIO (Raw) para a tabela de staging (Bronze/Silver) no DW.
+- **Resultado Esperado:** Linhagem de dados completa no `dbt docs`. Tabelas agregadas por hora prontas para BI.
 

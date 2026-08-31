@@ -1,0 +1,20 @@
+uci_data_warehouse:
+  target: dev
+  outputs:
+    dev: 
+      type: postgres
+
+      host: "{{ env_var('POSTGRES_HOST', 'localhost') }}"
+
+      user: "{{ env_var('POSTGRES_USER', 'admin') }}"
+      password: "{{ env_var('POSTGRES_PASSWORD', 'admin123') }}"
+
+      port: 5432
+      dbname: "{{ env_var('POSTGRES_DB', 'data_warehouse') }}"
+
+      schema: public
+
+      threads: 4
+      keepalives_idle: 0
+
+
