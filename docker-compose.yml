@@ -15,7 +15,7 @@ services:
       - "8000:8000"
     
     volumes:
-      - ./src/data:/data
+      - ./src:/app/src
 
     env_file:
       - .env
@@ -28,8 +28,51 @@ services:
       timeout: 5s
       retries: 3
       start_period: 5s
+  
+  # -------------------------------------
+
+  postgres_dw:
+    image: postgres:15
+    container_name: postgres_dw
+
+    networks:
+      - pipeline-network
+    
+    ports:
+      - "5432:5432"
+    
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-admin}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-admin123}
+      POSTGRES_DB: ${POSTGRES_DB:-data_warehouse}
+
+    volumes:
+      - posgres_data:/var/lib/postgresql/data
+
+    restart: unless-stopped
+
+  dataload:
+    build:
+      context: "."
+      dockerfile: infra/docker/Dockerfile.dataload
+
+    container_name: dataload
+    networks:
+      - pipeline-network
+    env_file:
+      - .env
+    depends_on:
+      - postgres_dw
+
+     
+  
+  #--------------------------------------------------
 
 networks:
   pipeline-network:
     driver: bridge
     name: pipeline-network
+
+volumes:
+  postgres_data:
+    name: postgres_data_volume
