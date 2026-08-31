@@ -52,7 +52,7 @@ O pipeline consome dados reais do dataset **[UCI — Individual Household Electr
 
 ---
 
-## 🏗 Arquitetura
+## Arquitetura
 
 O projeto adota a **Medallion Architecture** (Bronze → Silver → Gold), integrada a um fluxo de streaming de eventos.
 
